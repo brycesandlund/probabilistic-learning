@@ -19,11 +19,37 @@ class GameScene: SKScene {
     private var background : SKSpriteNode?
     private var leftCat : SKSpriteNode?
     private var rightCat : SKSpriteNode?
+    private var middleCat : SKSpriteNode?
     
     // array to dictate location of cats during run.
     private var catIsLeft: [Bool] = [false, false, true, false, false, false, true, false, false, true]
+    // change to being able to do 70/30
+    
+    // play sound when correct and sound when incorrect
     
     private var runNumber = 0
+    private static let catInTreeTime : TimeInterval = 4
+    private static let catInFrontTime : TimeInterval = 2
+    private static let beginningFrontTime : TimeInterval = 5
+    private static let fadeOutTime : TimeInterval = 1
+    
+    private func setupTrial(beginning : Bool) {
+        let wait1 = SKAction.wait(forDuration: GameScene.catInTreeTime)
+        let wait2 = SKAction.wait(forDuration: GameScene.catInFrontTime)
+        let wait3 = SKAction.wait(forDuration: GameScene.beginningFrontTime)
+        let unhide = SKAction.fadeIn(withDuration: 0)
+        let fadeOut = SKAction.fadeOut(withDuration: GameScene.fadeOutTime)
+        
+        var sequence : SKAction
+        if (!beginning) {
+            sequence = SKAction.sequence([wait1, unhide, wait2, fadeOut])
+        }
+        else {
+            sequence = SKAction.sequence([wait3, fadeOut])
+        }
+        
+        middleCat?.run(sequence)
+    }
     
     override func didMove(to view: SKView) {
         
@@ -32,9 +58,12 @@ class GameScene: SKScene {
         self.background = self.childNode(withName: "//background") as? SKSpriteNode
         self.leftCat = self.childNode(withName: "//leftCat") as? SKSpriteNode
         self.rightCat = self.childNode(withName: "//rightCat") as? SKSpriteNode
+        self.middleCat = self.childNode(withName: "//middleCat") as? SKSpriteNode
         
         leftCat?.isHidden = true
         rightCat?.isHidden = true
+        
+        setupTrial(beginning: true)
         
         background?.size = self.frame.size  // not sure if this is doing anything
     }
@@ -60,10 +89,12 @@ class GameScene: SKScene {
         }
         
         if (pickedLeft || pickedRight) {
-            let wait = SKAction.wait(forDuration: 2)
+            let wait = SKAction.wait(forDuration: GameScene.catInTreeTime)
             let hide = SKAction.hide()
             let sequence = SKAction.sequence([wait, hide])
             
+            setupTrial(beginning: false)
+
             if (catIsLeft[runNumber]) {
                 leftCat?.isHidden = false
                 leftCat?.run(sequence)
