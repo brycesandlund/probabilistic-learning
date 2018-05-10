@@ -16,6 +16,11 @@
 		02489A1D206C6B80008787B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02489A1C206C6B80008787B7 /* Assets.xcassets */; };
 		02489A20206C6B80008787B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02489A1E206C6B80008787B7 /* LaunchScreen.storyboard */; };
 		02489A2B206C6B81008787B7 /* ProbabilisticLearningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02489A2A206C6B81008787B7 /* ProbabilisticLearningTests.swift */; };
+		02578D99209A92E70018358A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02578D98209A92E70018358A /* MenuController.swift */; };
+		0261F27220A28C6300EC4329 /* Ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0261F27120A28C6300EC4329 /* Ding.wav */; };
+		0261F27420A28C6B00EC4329 /* WrongBuzzer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0261F27320A28C6B00EC4329 /* WrongBuzzer.mp3 */; };
+		0261F27620A39D8C00EC4329 /* EndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0261F27520A39D8C00EC4329 /* EndScreen.swift */; };
+		0261F27820A39F8D00EC4329 /* RunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0261F27720A39F8D00EC4329 /* RunSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +47,11 @@
 		02489A26206C6B81008787B7 /* ProbabilisticLearningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProbabilisticLearningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02489A2A206C6B81008787B7 /* ProbabilisticLearningTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbabilisticLearningTests.swift; sourceTree = "<group>"; };
 		02489A2C206C6B81008787B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02578D98209A92E70018358A /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		0261F27120A28C6300EC4329 /* Ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ding.wav; sourceTree = "<group>"; };
+		0261F27320A28C6B00EC4329 /* WrongBuzzer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WrongBuzzer.mp3; sourceTree = "<group>"; };
+		0261F27520A39D8C00EC4329 /* EndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScreen.swift; sourceTree = "<group>"; };
+		0261F27720A39F8D00EC4329 /* RunSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +93,8 @@
 		02489A0E206C6B80008787B7 /* ProbabilisticLearning */ = {
 			isa = PBXGroup;
 			children = (
+				0261F27120A28C6300EC4329 /* Ding.wav */,
+				0261F27320A28C6B00EC4329 /* WrongBuzzer.mp3 */,
 				02489A0F206C6B80008787B7 /* AppDelegate.swift */,
 				02489A11206C6B80008787B7 /* GameScene.sks */,
 				02489A13206C6B80008787B7 /* Actions.sks */,
@@ -92,6 +104,9 @@
 				02489A1C206C6B80008787B7 /* Assets.xcassets */,
 				02489A1E206C6B80008787B7 /* LaunchScreen.storyboard */,
 				02489A21206C6B80008787B7 /* Info.plist */,
+				02578D98209A92E70018358A /* MenuController.swift */,
+				0261F27520A39D8C00EC4329 /* EndScreen.swift */,
+				0261F27720A39F8D00EC4329 /* RunSettings.swift */,
 			);
 			path = ProbabilisticLearning;
 			sourceTree = "<group>";
@@ -192,6 +207,8 @@
 				02489A12206C6B80008787B7 /* GameScene.sks in Resources */,
 				02489A1D206C6B80008787B7 /* Assets.xcassets in Resources */,
 				02489A20206C6B80008787B7 /* LaunchScreen.storyboard in Resources */,
+				0261F27420A28C6B00EC4329 /* WrongBuzzer.mp3 in Resources */,
+				0261F27220A28C6300EC4329 /* Ding.wav in Resources */,
 				02489A14206C6B80008787B7 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +229,9 @@
 			files = (
 				02489A16206C6B80008787B7 /* GameScene.swift in Sources */,
 				02489A18206C6B80008787B7 /* GameViewController.swift in Sources */,
+				02578D99209A92E70018358A /* MenuController.swift in Sources */,
+				0261F27620A39D8C00EC4329 /* EndScreen.swift in Sources */,
+				0261F27820A39F8D00EC4329 /* RunSettings.swift in Sources */,
 				02489A10206C6B80008787B7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
