@@ -11,7 +11,7 @@ import SpriteKit
 import GameplayKit
 
 
-class MenuController: UIViewController {
+class MenuController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var buttonTest: UIButton!
     @IBOutlet weak var startDemo: UIButton!
@@ -28,6 +28,12 @@ class MenuController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        participantIDField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
     @IBAction func trialCountChanged(_ sender: UIStepper) {
@@ -63,15 +69,20 @@ class MenuController: UIViewController {
         return true
     }
     
+    // Doesn't do anything (yet) but necessary so unwind in 3rd controller points back here
+    @IBAction func unwindHere(unwindSegue: UIStoryboardSegue) {
+        
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let controller = segue.destination as? GameViewController {
-            if (segue.identifier == "StartDemo") {
+            if (segue.identifier == "startDemo") {
                 controller.runSettings = RunSettings()
             }
-            else if (segue.identifier == "StartTrial") {
+            else if (segue.identifier == "startTrial") {
                 let leftSpread = Int(spreadStepper.value)
                 let trials = Int(trialCountStepper.value)
                 let isMale = genderToggle.isEnabledForSegment(at: 0)

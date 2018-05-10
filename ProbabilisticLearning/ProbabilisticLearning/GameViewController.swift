@@ -11,15 +11,13 @@ import SpriteKit
 import GameplayKit
 
 protocol GameDelegate {
-    func launchViewController(scene: SKScene)
+    func launchViewController()
 }
 
 class GameViewController: UIViewController, GameDelegate {
     
-    func launchViewController(scene: SKScene) {
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameViewController") as? EndScreen {
-            self.present(vc, animated: true, completion: nil)
-        }
+    func launchViewController() {
+        self.performSegue(withIdentifier: "finish", sender: nil)
     }
     
     var runSettings : RunSettings!
@@ -42,9 +40,6 @@ class GameViewController: UIViewController, GameDelegate {
             }
             
             view.ignoresSiblingOrder = true
-            
-         //   view.showsFPS = true
-         //   view.showsNodeCount = true
         }
         
     }
@@ -69,5 +64,11 @@ class GameViewController: UIViewController, GameDelegate {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    // only segue out of here is to the end. Time to store the data.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("Attempting to write to file")
+        runSettings.saveResults()
     }
 }

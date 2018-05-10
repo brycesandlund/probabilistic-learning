@@ -24,7 +24,6 @@ class GameScene: SKScene {
     
     var gameDelegate: GameDelegate?
     var runSettings : RunSettings!
-    // change to being able to do 70/30
     
     // play sound when correct and sound when incorrect
     var correctSound: AVAudioPlayer?
@@ -32,10 +31,11 @@ class GameScene: SKScene {
     
     private var runNumber = 0
     private var pauseInteraction = true
+    private var lastAction : Date = Date()
     
-    private static let catInTreeTime : TimeInterval = 4
-    private static let catInFrontTime : TimeInterval = 2
-    private static let beginningFrontTime : TimeInterval = 5
+    private static let catInTreeTime : TimeInterval = 3//4  temporary to speed up tests
+    private static let catInFrontTime : TimeInterval = 2//2
+    private static let beginningFrontTime : TimeInterval = 5//5
     private static let fadeOutTime : TimeInterval = 1
     
     // Called at the beginning and after every trial to setup the cat animation stuff
@@ -48,6 +48,7 @@ class GameScene: SKScene {
         let fadeOut = SKAction.fadeOut(withDuration: GameScene.fadeOutTime)
         let unpause = SKAction.run {
             self.pauseInteraction = false
+            self.lastAction = Date()
         }
         
         var sequence : SKAction
@@ -162,15 +163,20 @@ class GameScene: SKScene {
             
             // correct!
             if (pickedLeft && runSettings.catIsLeft[runNumber] || pickedRight && !runSettings.catIsLeft[runNumber]) {
+                runSettings.runResults?.correct[runNumber] = true
                 correctSound?.play()
             }
             else {  // incorrect D:
+                runSettings.runResults?.correct[runNumber] = false
                 incorrectSound?.play()
             }
             
+            runSettings.runResults?.RT[runNumber] = Double(Date().timeIntervalSince(lastAction))
+            
             runNumber += 1
             if (runNumber == runSettings.catIsLeft.count) {
-                gameDelegate?.launchViewController(scene: self)
+                print("runs equal")
+                gameDelegate?.launchViewController()
             }
         }
     }
