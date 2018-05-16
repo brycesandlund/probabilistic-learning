@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Used for end screen. May remove. Currently does basically nothing
 class EndScreen: UIViewController {
 
     override func viewDidLoad() {
@@ -21,31 +22,17 @@ class EndScreen: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // The following three functions were at one point used to force orientation, however there is another
+    // setting in info.plist that may have actually done the trick
     override var shouldAutorotate: Bool {
         return false
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        /*    if UIDevice.current.userInterfaceIdiom == .phone {
-         return .allButUpsideDown
-         } else {
-         return .all
-         }*/
         return .landscapeRight
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

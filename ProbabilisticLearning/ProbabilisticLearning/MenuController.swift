@@ -10,16 +10,20 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-
+// Used for beginning menu
 class MenuController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var buttonTest: UIButton!
+    @IBOutlet weak var startTrial: UIButton!
     @IBOutlet weak var startDemo: UIButton!
+    
+    // spread UIStepper. Takes from 0-100 in steps of 10. Holds left value
     @IBOutlet weak var spreadStepper: UIStepper!
     @IBOutlet weak var LLabel: UILabel!
     @IBOutlet weak var RLabel: UILabel!
+    
     @IBOutlet weak var trialCountStepper: UIStepper!
     @IBOutlet weak var trialCountLabel: UILabel!
+    
     @IBOutlet weak var participantIDField: UITextField!
     @IBOutlet weak var genderToggle: UISegmentedControl!
     @IBOutlet weak var dateOfBirthPicker: UIDatePicker!
@@ -41,6 +45,7 @@ class MenuController: UIViewController, UITextFieldDelegate {
         trialCountLabel.text = String(actualValue)
     }
     
+    // Update labels for Spread-thing.
     @IBAction func spreadChanged(_ sender: UIStepper) {
         let actualValue = Int(sender.value)
         LLabel.text = String(actualValue)
@@ -52,16 +57,13 @@ class MenuController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    // The following three functions were at one point used to force orientation, however there is another
+    // setting in info.plist that may have actually done the trick
     override var shouldAutorotate: Bool {
         return false
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        /*    if UIDevice.current.userInterfaceIdiom == .phone {
-         return .allButUpsideDown
-         } else {
-         return .all
-         }*/
         return .landscapeRight
     }
     
@@ -74,7 +76,7 @@ class MenuController: UIViewController, UITextFieldDelegate {
         
     }
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // Uses the segue label to pass the appropriate data based on if a demo or a trial
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.

@@ -10,16 +10,19 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+// This delegate allows SKScene to perform a segue programatically
 protocol GameDelegate {
     func launchViewController()
 }
 
 class GameViewController: UIViewController, GameDelegate {
     
+    // Launches "finish" segue, via push.
     func launchViewController() {
         self.performSegue(withIdentifier: "finish", sender: nil)
     }
     
+    // Run settings, set by MenuController.swift. Passed to SKScene.
     var runSettings : RunSettings!
     
     override func viewDidLoad() {
@@ -44,26 +47,23 @@ class GameViewController: UIViewController, GameDelegate {
         
     }
 
+    // The following three functions were at one point used to force orientation, however there is another
+    // setting in info.plist that may have actually done the trick
     override var shouldAutorotate: Bool {
         return false
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-    /*    if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }*/
         return .landscapeRight
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
     
     // only segue out of here is to the end. Time to store the data.

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Class not touched from auto-gen
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

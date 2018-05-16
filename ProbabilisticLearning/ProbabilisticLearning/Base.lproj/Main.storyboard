@@ -199,12 +199,12 @@
                     <connections>
                         <outlet property="LLabel" destination="gcw-RN-1ae" id="aJD-LQ-nDQ"/>
                         <outlet property="RLabel" destination="vff-1r-PHz" id="VMp-Ih-rXl"/>
-                        <outlet property="buttonTest" destination="vdj-6B-wuX" id="HcU-9E-MCL"/>
                         <outlet property="dateOfBirthPicker" destination="PL9-7i-0Gf" id="57g-Bh-rJf"/>
                         <outlet property="genderToggle" destination="4u2-rq-6Ar" id="cYc-Fx-FCR"/>
                         <outlet property="participantIDField" destination="vqR-qt-FP2" id="Xom-N7-50C"/>
                         <outlet property="spreadStepper" destination="JXg-n9-JkB" id="Q5e-QO-XaN"/>
                         <outlet property="startDemo" destination="gry-23-oRg" id="k25-Gu-BEI"/>
+                        <outlet property="startTrial" destination="vdj-6B-wuX" id="HcU-9E-MCL"/>
                         <outlet property="trialCountLabel" destination="sKF-du-6RR" id="9cO-uU-O0M"/>
                         <outlet property="trialCountStepper" destination="ETL-yr-cbi" id="kcF-4a-KSP"/>
                     </connections>

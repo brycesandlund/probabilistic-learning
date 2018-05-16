@@ -10,11 +10,9 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
+// Logic for experiment is in this file
 class GameScene: SKScene {
-    
-    private var label : SKLabelNode?
-    private var spinnyNode : SKShapeNode?
-    
+    // Scene objects
     private var leftTree : SKSpriteNode?
     private var rightTree : SKSpriteNode?
     private var background : SKSpriteNode?
@@ -22,6 +20,7 @@ class GameScene: SKScene {
     private var rightCat : SKSpriteNode?
     private var middleCat : SKSpriteNode?
     
+    // Settings from GameViewController, and delegate to segue from GameViewController
     var gameDelegate: GameDelegate?
     var runSettings : RunSettings!
     
@@ -29,23 +28,29 @@ class GameScene: SKScene {
     var correctSound: AVAudioPlayer?
     var incorrectSound: AVAudioPlayer?
     
+    // Instance variables
     private var runNumber = 0
     private var pauseInteraction = true
     private var lastAction : Date = Date()
     
-    private static let catInTreeTime : TimeInterval = 3//4  temporary to speed up tests
-    private static let catInFrontTime : TimeInterval = 2//2
-    private static let beginningFrontTime : TimeInterval = 5//5
-    private static let fadeOutTime : TimeInterval = 1
+    // Timing constants
+    private static let catInTreeTime : TimeInterval = 1//4  temporary to speed up tests
+    private static let catInFrontTime : TimeInterval = 1//2
+    private static let beginningFrontTime : TimeInterval = 2//5
+    private static let fadeOutTime : TimeInterval = 0.5
     
     // Called at the beginning and after every trial to setup the cat animation stuff
     private func setupTrial(beginning : Bool) {
+        // This is set twice if not the beginning, but shouldn't hurt
         self.pauseInteraction = true
+        
         let wait1 = SKAction.wait(forDuration: GameScene.catInTreeTime)
         let wait2 = SKAction.wait(forDuration: GameScene.catInFrontTime)
         let wait3 = SKAction.wait(forDuration: GameScene.beginningFrontTime)
-        let unhide = SKAction.fadeIn(withDuration: 0)
+        let unhide = SKAction.fadeIn(withDuration: 0)   // necessary to fade in when fading out
         let fadeOut = SKAction.fadeOut(withDuration: GameScene.fadeOutTime)
+        
+        // Code block after middle cat disappears
         let unpause = SKAction.run {
             self.pauseInteraction = false
             self.lastAction = Date()
@@ -64,7 +69,7 @@ class GameScene: SKScene {
     
     // use this function to instantiate the view with any info
     override func didMove(to view: SKView) {
-        
+        // set variables with what's in GameScene.sks
         self.leftTree = self.childNode(withName: "//leftTree") as? SKSpriteNode
         self.rightTree = self.childNode(withName: "//rightTree") as? SKSpriteNode
         self.background = self.childNode(withName: "//background") as? SKSpriteNode
@@ -72,9 +77,11 @@ class GameScene: SKScene {
         self.rightCat = self.childNode(withName: "//rightCat") as? SKSpriteNode
         self.middleCat = self.childNode(withName: "//middleCat") as? SKSpriteNode
         
+        // hide cats
         leftCat?.isHidden = true
         rightCat?.isHidden = true
         
+        // do middle cat stuff, beginning true this time!
         setupTrial(beginning: true)
         
         background?.size = self.frame.size  // not sure if this is doing anything
@@ -84,6 +91,7 @@ class GameScene: SKScene {
         incorrectSound = returnAudioPlayer(name: "WrongBuzzer", ext: "mp3")
     }
     
+    // Get AudioPlayer object if possible
     func returnAudioPlayer(name: String, ext: String) -> AVAudioPlayer? {
         guard let url = Bundle.main.url(forResource: name, withExtension: ext) else {
             return nil
@@ -124,8 +132,10 @@ class GameScene: SKScene {
     
     // detects the touch and does the cat stuff accordingly
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // ignore everything if in the middle of cat animations
         if (pauseInteraction) { return }
         
+        // detect if left or right tree has been touched
         let touch:UITouch = touches.first!
         let positionInScene = touch.location(in: self)
         let touchedNodes = self.nodes(at: positionInScene)
@@ -145,11 +155,15 @@ class GameScene: SKScene {
         }
         
         if (pickedLeft || pickedRight) {
+            // pause until unpaused via setupTrial
             self.pauseInteraction = true
+            
+            // Actions for cat that is revealed
             let wait = SKAction.wait(forDuration: GameScene.catInTreeTime)
             let hide = SKAction.hide()
             let sequence = SKAction.sequence([wait, hide])
             
+            // this call signals the middle cat to do its sequence
             setupTrial(beginning: false)
 
             if (runSettings.catIsLeft[runNumber]) {
@@ -171,6 +185,8 @@ class GameScene: SKScene {
                 incorrectSound?.play()
             }
             
+            // Store time since current second (via Date()) and lastAction, set when middle cat
+            // disappears, in setupTrial
             runSettings.runResults?.RT[runNumber] = Double(Date().timeIntervalSince(lastAction))
             
             runNumber += 1
@@ -192,7 +208,6 @@ class GameScene: SKScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     //    for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
-    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered

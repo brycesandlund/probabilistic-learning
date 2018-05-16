@@ -10,17 +10,23 @@ import Foundation
 import GameplayKit
 
 class RunSettings {
+    // this is set at initialization and read by GameScene to determine cat placement
     var catIsLeft: [Bool] = [true, true, false, false]
+    // determines how many out of each 10 trial increment are left, stored as an integer percentage
     var leftSpread: Int?
 
+    // The following are nil only if it is a demo
     var isMale: Bool?
     var participantID: String?
     var dateOfBirth: Date?
     
+    // If not a demo, RunResults is populated, otherwise is nil
     var runResults: RunResults?
     
+    // File to write summary results to
     static let summaryFile = "Summary.csv"
     
+    // Checks if file fileName exists in documents directory
     func documentFileExists(fileName: String) -> Bool {
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)
@@ -28,10 +34,10 @@ class RunSettings {
             let filePath = pathComponent.path
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: filePath) {
-                print("FILE AVAILABLE")
+                print("FILE AVAILABLE at: \(filePath)")
                 return true
             } else {
-                print("FILE NOT AVAILABLE")
+                print("FILE NOT AVAILABLE at \(filePath)")
                 return false
             }
         } else {
@@ -40,6 +46,7 @@ class RunSettings {
         }
     }
     
+    // Writes to file fileName in documents of App, the content fileContent, optionally appending if the file exists
     func writeToFile(fileName: String, fileContent: String, append: Bool) {
         let dir = try? FileManager.default.url(for: .documentDirectory,
                                                in: .userDomainMask, appropriateFor: nil, create: true)
@@ -64,6 +71,7 @@ class RunSettings {
         }
     }
     
+    // outputs a summary to summary file
     func outputSummary() {
         var summaryOutput = ""
         let fileExists = documentFileExists(fileName: RunSettings.summaryFile)
@@ -100,6 +108,7 @@ class RunSettings {
         writeToFile(fileName: RunSettings.summaryFile, fileContent: summaryOutput, append: fileExists)
     }
     
+    // outputs a detailed view per participant, appending _2, _3, ... if not first run with participant
     func outputDetail() {
         var fileName = participantID! + ".csv"
         var attempt = 1
@@ -118,13 +127,14 @@ class RunSettings {
             let choseLeft = catIsLeft[index] && (runResults?.correct)![index]! || !catIsLeft[index] && !(runResults?.correct)![index]!
             let choseLeftStr = choseLeft ? "L" : "R"
             let correct = (runResults?.correct)![index]! ? "Y" : "N"
-            let RT = String(format: "%.2lf", (runResults?.RT)![index]!)
+            let RT = String(format: "%.4lf", (runResults?.RT)![index]!)
             dataContent += "\(index+1),\(choseLeftStr),\(correct),\(RT)\n"
         }
         
         writeToFile(fileName: fileName, fileContent: dataContent, append: false)
     }
     
+    // save both summary and detail results
     func saveResults() {
         if runResults != nil {
             outputSummary()
@@ -148,7 +158,8 @@ class RunSettings {
         self.leftSpread = leftSpread
         
         catIsLeft = []
-        // Sam wants this to be evenly split for every 10 trials... Though this encourages the strategy of "oh this one hasn't come about in awhile!"...
+        // Sam wants this to be evenly split for every 10 trials... Though this makes runs not independent
+        // of previous trials
         for _ in 0..<trials/10 {
             catIsLeft += getTen(leftSpread: leftSpread)
         }
