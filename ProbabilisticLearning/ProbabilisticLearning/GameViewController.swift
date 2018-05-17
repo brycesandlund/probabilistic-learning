@@ -16,6 +16,8 @@ protocol GameDelegate {
 }
 
 class GameViewController: UIViewController, GameDelegate {
+    @IBOutlet weak var backToStartButton: UIButton!
+    @IBOutlet weak var hideButton: UIButton!
     
     // Launches "finish" segue, via push.
     func launchViewController() {
@@ -37,6 +39,8 @@ class GameViewController: UIViewController, GameDelegate {
                 // Pass parameters of run into scene object
                 scene.runSettings = self.runSettings
                 scene.gameDelegate = self
+                scene.backToStartButton = backToStartButton
+                scene.hideButton = hideButton
                 
                 // Present the scene
                 view.presentScene(scene)
@@ -46,7 +50,12 @@ class GameViewController: UIViewController, GameDelegate {
         }
         
     }
-
+    
+    @IBAction func hideButtonClicked(_ sender: UIButton) {
+        backToStartButton.isHidden = true
+        hideButton.isHidden = true
+    }
+    
     // The following three functions were at one point used to force orientation, however there is another
     // setting in info.plist that may have actually done the trick
     override var shouldAutorotate: Bool {
@@ -68,7 +77,6 @@ class GameViewController: UIViewController, GameDelegate {
     
     // only segue out of here is to the end. Time to store the data.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("Attempting to write to file")
         runSettings.saveResults()
     }
 }

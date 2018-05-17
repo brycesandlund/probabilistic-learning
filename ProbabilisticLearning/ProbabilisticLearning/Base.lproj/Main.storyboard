@@ -220,16 +220,38 @@
                     <view key="view" contentMode="scaleToFill" id="bNw-iQ-lMm" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLi-PA-UbY">
+                                <rect key="frame" x="832" y="690" width="172" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Back to Start"/>
+                                <connections>
+                                    <segue destination="zfe-6d-vfM" kind="unwind" unwindAction="unwindHereWithUnwindSegue:" id="Jub-n1-Fy1"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kal-SD-PfP">
+                                <rect key="frame" x="898" y="660" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="(hide)"/>
+                                <connections>
+                                    <action selector="hideButtonClicked:" destination="l1n-Rb-Vvf" eventType="touchUpInside" id="IeC-xE-yUo"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="A4d-kS-V9m"/>
                     </view>
                     <connections>
+                        <outlet property="backToStartButton" destination="iLi-PA-UbY" id="B6t-qa-leW"/>
+                        <outlet property="hideButton" destination="kal-SD-PfP" id="F3U-1e-T6V"/>
                         <segue destination="2Cz-Bu-LMr" kind="show" identifier="finish" id="3Dz-bp-foK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ihf-BP-TzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="zfe-6d-vfM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="659" y="-13"/>
+            <point key="canvasLocation" x="658.59375" y="-13.28125"/>
         </scene>
         <!--End Screen-->
         <scene sceneID="C67-uC-pWX">

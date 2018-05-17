@@ -90,7 +90,7 @@ class MenuController: UIViewController, UITextFieldDelegate {
                 let isMale = genderToggle.isEnabledForSegment(at: 0)
                 let participantID = participantIDField.text
                 let dateOfBirth = dateOfBirthPicker.date
-                controller.runSettings = RunSettings(leftSpread: leftSpread, trials: trials, isMale: isMale, participantID: participantID!, dateOfBirth: dateOfBirth)
+                controller.runSettings = TrialRunSettings(leftSpread: leftSpread, trials: trials, isMale: isMale, participantID: participantID!, dateOfBirth: dateOfBirth)
             }
         }
     }

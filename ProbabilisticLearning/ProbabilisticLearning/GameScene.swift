@@ -19,6 +19,9 @@ class GameScene: SKScene {
     private var leftCat : SKSpriteNode?
     private var rightCat : SKSpriteNode?
     private var middleCat : SKSpriteNode?
+    private var backToStart : SKLabelNode?
+    var backToStartButton : UIButton?
+    var hideButton : UIButton?
     
     // Settings from GameViewController, and delegate to segue from GameViewController
     var gameDelegate: GameDelegate?
@@ -34,10 +37,11 @@ class GameScene: SKScene {
     private var lastAction : Date = Date()
     
     // Timing constants
-    private static let catInTreeTime : TimeInterval = 1//4  temporary to speed up tests
-    private static let catInFrontTime : TimeInterval = 1//2
-    private static let beginningFrontTime : TimeInterval = 2//5
+    private static let catInTreeTime : TimeInterval = 1
+    private static let catInFrontTime : TimeInterval = 1
+    private static let beginningFrontTime : TimeInterval = 2
     private static let fadeOutTime : TimeInterval = 0.5
+    private static let showButtonDelay : TimeInterval = 1.5
     
     // Called at the beginning and after every trial to setup the cat animation stuff
     private func setupTrial(beginning : Bool) {
@@ -76,10 +80,12 @@ class GameScene: SKScene {
         self.leftCat = self.childNode(withName: "//leftCat") as? SKSpriteNode
         self.rightCat = self.childNode(withName: "//rightCat") as? SKSpriteNode
         self.middleCat = self.childNode(withName: "//middleCat") as? SKSpriteNode
+        self.backToStart = self.childNode(withName: "//backToStart") as? SKLabelNode
         
-        // hide cats
+        // hide stuff
         leftCat?.isHidden = true
         rightCat?.isHidden = true
+        //backToStart?.run(SKAction.fadeAlpha(to: 0, duration: 0))
         
         // do middle cat stuff, beginning true this time!
         setupTrial(beginning: true)
@@ -103,96 +109,113 @@ class GameScene: SKScene {
         }
     }
     
-    // Another method to play sound that works just as well, but I feel the above way is more as it was designed.
-    /*func playSound(name: String, ext: String) {
-        print("trying a sound")
-        guard let url = Bundle.main.url(forResource: name, withExtension: ext) else {
-            print("resource not found")
-            return
+    func showBackToStart() {
+        let wait1 = SKAction.wait(forDuration: GameScene.showButtonDelay)
+        let makeVisible = SKAction.run {
+            self.backToStartButton?.isHidden = false
+            if (self.runNumber < self.runSettings.catIsLeft.count) {
+                self.hideButton?.isHidden = false
+            }
         }
-        do {
-            //try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            //try AVAudioSession.sharedInstance().setActive(true)
-            
-            
-            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
-            player = try AVAudioPlayer(contentsOf: url)
-            
-            /* iOS 10 and earlier require the following line:
-             player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
-            
-            //guard let player = player else { return }
-            
-            player?.play()
-            
-        } catch let error {
-            print(error.localizedDescription)
+        let sequence = SKAction.sequence([wait1, makeVisible])
+        // running on background since it can be run on any object
+        background?.run(sequence)
+        
+    /*    let wait1 = SKAction.wait(forDuration: 1.5)
+        let fadeIn = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
+        let wait2 = SKAction.wait(forDuration: 3)
+        let end = SKAction.run {
+            self.gameDelegate?.launchViewController()
         }
-    }*/
+        let sequence = SKAction.sequence([wait1, fadeIn, wait2, end])
+        backToStart?.run(sequence)*/
+    }
+    
+    func hideButtonLogic() {
+        if (backToStartButton?.isHidden == true && runNumber < runSettings.catIsLeft.count) {
+            background?.removeAllActions()
+        }
+    //    backToStartButton?.isHidden = true
+    /*    backToStart?.removeAllActions()
+        backToStart?.run(SKAction.fadeOut(withDuration: 0))*/
+    }
     
     // detects the touch and does the cat stuff accordingly
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // ignore everything if in the middle of cat animations
-        if (pauseInteraction) { return }
-        
         // detect if left or right tree has been touched
         let touch:UITouch = touches.first!
         let positionInScene = touch.location(in: self)
-        let touchedNodes = self.nodes(at: positionInScene)
         
-        var pickedLeft = false
-        var pickedRight = false
-        
-        for node in touchedNodes {
-            if node.name == leftTree?.name {
-                print("touched left")
-                pickedLeft = true
-            }
-            else if node.name == rightTree?.name {
-                print("touched right")
-                pickedRight = true
-            }
+        // values chosen by printing the coordinates
+        if (positionInScene.x >= 291.5 && positionInScene.y <= -295) {
+            print("touching backToStart")
+            showBackToStart()
+        }
+        else {
+            hideButtonLogic()
         }
         
-        if (pickedLeft || pickedRight) {
-            // pause until unpaused via setupTrial
-            self.pauseInteraction = true
+        // ignore tree touches if in the middle of cat animation
+        if (!pauseInteraction) {
+            let touchedNodes = self.nodes(at: positionInScene)
             
-            // Actions for cat that is revealed
-            let wait = SKAction.wait(forDuration: GameScene.catInTreeTime)
-            let hide = SKAction.hide()
-            let sequence = SKAction.sequence([wait, hide])
+            var pickedLeft = false
+            var pickedRight = false
             
-            // this call signals the middle cat to do its sequence
-            setupTrial(beginning: false)
+            for node in touchedNodes {
+                if node.name == leftTree?.name {
+                    print("touched left")
+                    pickedLeft = true
+                }
+                else if node.name == rightTree?.name {
+                    print("touched right")
+                    pickedRight = true
+                }
+            }
+            
+            if (pickedLeft || pickedRight) {
+                // pause until unpaused via setupTrial
+                self.pauseInteraction = true
+                
+                // Actions for cat that is revealed
+                let wait = SKAction.wait(forDuration: GameScene.catInTreeTime)
+                let hide = SKAction.hide()
+                let sequence = SKAction.sequence([wait, hide])
 
-            if (runSettings.catIsLeft[runNumber]) {
-                leftCat?.isHidden = false
-                leftCat?.run(sequence)
-            }
-            else {
-                rightCat?.isHidden = false
-                rightCat?.run(sequence)
-            }
-            
-            // correct!
-            if (pickedLeft && runSettings.catIsLeft[runNumber] || pickedRight && !runSettings.catIsLeft[runNumber]) {
-                runSettings.runResults?.correct[runNumber] = true
-                correctSound?.play()
-            }
-            else {  // incorrect D:
-                runSettings.runResults?.correct[runNumber] = false
-                incorrectSound?.play()
-            }
-            
-            // Store time since current second (via Date()) and lastAction, set when middle cat
-            // disappears, in setupTrial
-            runSettings.runResults?.RT[runNumber] = Double(Date().timeIntervalSince(lastAction))
-            
-            runNumber += 1
-            if (runNumber == runSettings.catIsLeft.count) {
-                print("runs equal")
-                gameDelegate?.launchViewController()
+                if (runSettings.catIsLeft[runNumber]) {
+                    leftCat?.isHidden = false
+                    leftCat?.run(sequence)
+                }
+                else {
+                    rightCat?.isHidden = false
+                    rightCat?.run(sequence)
+                }
+                
+                // correct!
+                var correct : Bool
+                if (pickedLeft && runSettings.catIsLeft[runNumber] || pickedRight && !runSettings.catIsLeft[runNumber]) {
+                    correctSound?.play()
+                    correct = true
+                }
+                else {  // incorrect D:
+                    incorrectSound?.play()
+                    correct = false
+                }
+                
+                // possibly record trial. Handled by RunSettings/ TrialRunSettings subclassing
+                runSettings.recordTrial(correct: correct, RT: Double(Date().timeIntervalSince(lastAction)))
+                
+                runNumber += 1
+                
+                // this call signals the middle cat to do its sequence if not last trial
+                if (runNumber < runSettings.catIsLeft.count) {
+                    setupTrial(beginning: false)
+                }
+                
+                if (runNumber == runSettings.catIsLeft.count) {
+                    print("runs equal")
+                    showBackToStart()
+                }
             }
         }
     }
@@ -202,7 +225,7 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //    for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        hideButtonLogic()
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

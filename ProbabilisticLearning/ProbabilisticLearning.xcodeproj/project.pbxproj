@@ -21,6 +21,7 @@
 		0261F27420A28C6B00EC4329 /* WrongBuzzer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0261F27320A28C6B00EC4329 /* WrongBuzzer.mp3 */; };
 		0261F27620A39D8C00EC4329 /* EndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0261F27520A39D8C00EC4329 /* EndScreen.swift */; };
 		0261F27820A39F8D00EC4329 /* RunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0261F27720A39F8D00EC4329 /* RunSettings.swift */; };
+		02EBC55E20AD3A06009338D0 /* TrialRunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EBC55D20AD3A06009338D0 /* TrialRunSettings.swift */; };
 		02F06EC420A433A600A937BA /* RunResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F06EC320A433A600A937BA /* RunResults.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		0261F27320A28C6B00EC4329 /* WrongBuzzer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WrongBuzzer.mp3; sourceTree = "<group>"; };
 		0261F27520A39D8C00EC4329 /* EndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScreen.swift; sourceTree = "<group>"; };
 		0261F27720A39F8D00EC4329 /* RunSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunSettings.swift; sourceTree = "<group>"; };
+		02EBC55D20AD3A06009338D0 /* TrialRunSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialRunSettings.swift; sourceTree = "<group>"; };
 		02F06EC320A433A600A937BA /* RunResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 				0261F27520A39D8C00EC4329 /* EndScreen.swift */,
 				0261F27720A39F8D00EC4329 /* RunSettings.swift */,
 				02F06EC320A433A600A937BA /* RunResults.swift */,
+				02EBC55D20AD3A06009338D0 /* TrialRunSettings.swift */,
 			);
 			path = ProbabilisticLearning;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				02F06EC420A433A600A937BA /* RunResults.swift in Sources */,
 				02489A16206C6B80008787B7 /* GameScene.swift in Sources */,
 				02489A18206C6B80008787B7 /* GameViewController.swift in Sources */,
+				02EBC55E20AD3A06009338D0 /* TrialRunSettings.swift in Sources */,
 				02578D99209A92E70018358A /* MenuController.swift in Sources */,
 				0261F27620A39D8C00EC4329 /* EndScreen.swift in Sources */,
 				0261F27820A39F8D00EC4329 /* RunSettings.swift in Sources */,
