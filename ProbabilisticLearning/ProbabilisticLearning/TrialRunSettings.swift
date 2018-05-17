@@ -114,16 +114,17 @@ class TrialRunSettings : RunSettings {
         }
         
         var dataContent = ""
-        let header = "Run,Choice,Correct,RT\n"
+        let header = "Run,Choice,Cat,Correct,RT\n"
         
         dataContent += header
         
         for index in 0..<runResults.correct.count {
             let choseLeft = catIsLeft[index] && (runResults.correct)[index] || !catIsLeft[index] && !(runResults.correct)[index]
+            let cat = catIsLeft[index] ? "L" : "R"
             let choseLeftStr = choseLeft ? "L" : "R"
             let correct = (runResults.correct)[index] ? "Y" : "N"
             let RT = String(format: "%.4lf", (runResults.RT)[index])
-            dataContent += "\(index+1),\(choseLeftStr),\(correct),\(RT)\n"
+            dataContent += "\(index+1),\(choseLeftStr),\(cat),\(correct),\(RT)\n"
         }
         
         writeToFile(fileName: fileName, fileContent: dataContent, append: false)

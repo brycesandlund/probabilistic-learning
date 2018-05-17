@@ -19,9 +19,9 @@
 		02578D99209A92E70018358A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02578D98209A92E70018358A /* MenuController.swift */; };
 		0261F27220A28C6300EC4329 /* Ding.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0261F27120A28C6300EC4329 /* Ding.wav */; };
 		0261F27420A28C6B00EC4329 /* WrongBuzzer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0261F27320A28C6B00EC4329 /* WrongBuzzer.mp3 */; };
-		0261F27620A39D8C00EC4329 /* EndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0261F27520A39D8C00EC4329 /* EndScreen.swift */; };
 		0261F27820A39F8D00EC4329 /* RunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0261F27720A39F8D00EC4329 /* RunSettings.swift */; };
 		02EBC55E20AD3A06009338D0 /* TrialRunSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EBC55D20AD3A06009338D0 /* TrialRunSettings.swift */; };
+		02EBC56020ADDE54009338D0 /* Chime.wav in Resources */ = {isa = PBXBuildFile; fileRef = 02EBC55F20ADDE54009338D0 /* Chime.wav */; };
 		02F06EC420A433A600A937BA /* RunResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F06EC320A433A600A937BA /* RunResults.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,9 +52,9 @@
 		02578D98209A92E70018358A /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		0261F27120A28C6300EC4329 /* Ding.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Ding.wav; sourceTree = "<group>"; };
 		0261F27320A28C6B00EC4329 /* WrongBuzzer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WrongBuzzer.mp3; sourceTree = "<group>"; };
-		0261F27520A39D8C00EC4329 /* EndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScreen.swift; sourceTree = "<group>"; };
 		0261F27720A39F8D00EC4329 /* RunSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunSettings.swift; sourceTree = "<group>"; };
 		02EBC55D20AD3A06009338D0 /* TrialRunSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialRunSettings.swift; sourceTree = "<group>"; };
+		02EBC55F20ADDE54009338D0 /* Chime.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chime.wav; sourceTree = "<group>"; };
 		02F06EC320A433A600A937BA /* RunResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +99,7 @@
 			children = (
 				0261F27120A28C6300EC4329 /* Ding.wav */,
 				0261F27320A28C6B00EC4329 /* WrongBuzzer.mp3 */,
+				02EBC55F20ADDE54009338D0 /* Chime.wav */,
 				02489A0F206C6B80008787B7 /* AppDelegate.swift */,
 				02489A11206C6B80008787B7 /* GameScene.sks */,
 				02489A13206C6B80008787B7 /* Actions.sks */,
@@ -109,7 +110,6 @@
 				02489A1E206C6B80008787B7 /* LaunchScreen.storyboard */,
 				02489A21206C6B80008787B7 /* Info.plist */,
 				02578D98209A92E70018358A /* MenuController.swift */,
-				0261F27520A39D8C00EC4329 /* EndScreen.swift */,
 				0261F27720A39F8D00EC4329 /* RunSettings.swift */,
 				02F06EC320A433A600A937BA /* RunResults.swift */,
 				02EBC55D20AD3A06009338D0 /* TrialRunSettings.swift */,
@@ -212,6 +212,7 @@
 				02489A1B206C6B80008787B7 /* Main.storyboard in Resources */,
 				02489A12206C6B80008787B7 /* GameScene.sks in Resources */,
 				02489A1D206C6B80008787B7 /* Assets.xcassets in Resources */,
+				02EBC56020ADDE54009338D0 /* Chime.wav in Resources */,
 				02489A20206C6B80008787B7 /* LaunchScreen.storyboard in Resources */,
 				0261F27420A28C6B00EC4329 /* WrongBuzzer.mp3 in Resources */,
 				0261F27220A28C6300EC4329 /* Ding.wav in Resources */,
@@ -238,7 +239,6 @@
 				02489A18206C6B80008787B7 /* GameViewController.swift in Sources */,
 				02EBC55E20AD3A06009338D0 /* TrialRunSettings.swift in Sources */,
 				02578D99209A92E70018358A /* MenuController.swift in Sources */,
-				0261F27620A39D8C00EC4329 /* EndScreen.swift in Sources */,
 				0261F27820A39F8D00EC4329 /* RunSettings.swift in Sources */,
 				02489A10206C6B80008787B7 /* AppDelegate.swift in Sources */,
 			);

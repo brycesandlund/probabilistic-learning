@@ -245,47 +245,12 @@
                     <connections>
                         <outlet property="backToStartButton" destination="iLi-PA-UbY" id="B6t-qa-leW"/>
                         <outlet property="hideButton" destination="kal-SD-PfP" id="F3U-1e-T6V"/>
-                        <segue destination="2Cz-Bu-LMr" kind="show" identifier="finish" id="3Dz-bp-foK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ihf-BP-TzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="zfe-6d-vfM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="658.59375" y="-13.28125"/>
-        </scene>
-        <!--End Screen-->
-        <scene sceneID="C67-uC-pWX">
-            <objects>
-                <viewController storyboardIdentifier="EndScreen" id="2Cz-Bu-LMr" customClass="EndScreen" customModule="ProbabilisticLearning" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EUh-uf-SGN">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The End" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2CW-nT-3B8">
-                                <rect key="frame" x="400" y="195" width="224" height="177"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="47"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EoM-tR-vBd">
-                                <rect key="frame" x="372" y="436" width="280" height="147"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Back to Start"/>
-                                <connections>
-                                    <segue destination="PXw-Q2-w5h" kind="unwind" unwindAction="unwindHereWithUnwindSegue:" id="eDa-x9-76Y"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="s7P-Fq-xIz"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I05-VM-En9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="PXw-Q2-w5h" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="1334.765625" y="-13.28125"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
