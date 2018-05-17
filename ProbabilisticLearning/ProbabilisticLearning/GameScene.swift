@@ -19,7 +19,6 @@ class GameScene: SKScene {
     private var leftCat : SKSpriteNode?
     private var rightCat : SKSpriteNode?
     private var middleCat : SKSpriteNode?
-    private var backToStart : SKLabelNode?
     var backToStartButton : UIButton?
     var hideButton : UIButton?
     
@@ -80,12 +79,10 @@ class GameScene: SKScene {
         self.leftCat = self.childNode(withName: "//leftCat") as? SKSpriteNode
         self.rightCat = self.childNode(withName: "//rightCat") as? SKSpriteNode
         self.middleCat = self.childNode(withName: "//middleCat") as? SKSpriteNode
-        self.backToStart = self.childNode(withName: "//backToStart") as? SKLabelNode
         
         // hide stuff
         leftCat?.isHidden = true
         rightCat?.isHidden = true
-        //backToStart?.run(SKAction.fadeAlpha(to: 0, duration: 0))
         
         // do middle cat stuff, beginning true this time!
         setupTrial(beginning: true)
@@ -120,24 +117,12 @@ class GameScene: SKScene {
         let sequence = SKAction.sequence([wait1, makeVisible])
         // running on background since it can be run on any object
         background?.run(sequence)
-        
-    /*    let wait1 = SKAction.wait(forDuration: 1.5)
-        let fadeIn = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
-        let wait2 = SKAction.wait(forDuration: 3)
-        let end = SKAction.run {
-            self.gameDelegate?.launchViewController()
-        }
-        let sequence = SKAction.sequence([wait1, fadeIn, wait2, end])
-        backToStart?.run(sequence)*/
     }
     
     func hideButtonLogic() {
         if (backToStartButton?.isHidden == true && runNumber < runSettings.catIsLeft.count) {
             background?.removeAllActions()
         }
-    //    backToStartButton?.isHidden = true
-    /*    backToStart?.removeAllActions()
-        backToStart?.run(SKAction.fadeOut(withDuration: 0))*/
     }
     
     // detects the touch and does the cat stuff accordingly
